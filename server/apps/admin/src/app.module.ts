@@ -7,27 +7,21 @@ import { CoursesModule } from './courses/courses.module';
 import { EpisodesModule } from './episodes/episodes.module';
 import { MulterModule } from '@nestjs/platform-express';
 
-import { AliOssModule } from 'nestjs-ali-oss';
+const MAO = require('multer-aliyun-oss');
  
 
 
 @Module({
   imports: [
-    AliOssModule.register({
-        region: 'oss-cn-hongkong',
+      MulterModule.register({
+          storage: MAO({
+            config: {
+                region: 'oss-cn-hongkong',
                 accessKeyId: 'LTAI4GKS3A74ufjT3kCxX1DW',
                 accessKeySecret: 'w4us3NzIehtK9r2MByv1Q6j76fBzu6',
                 bucket: 'stackflow'
-    //   }),
-    //   MulterModule.register({
-    //       storage: MAO({
-    //         config: {
-    //             region: 'oss-cn-hongkong',
-    //             accessKeyId: 'LTAI4GKS3A74ufjT3kCxX1DW',
-    //             accessKeySecret: 'w4us3NzIehtK9r2MByv1Q6j76fBzu6',
-    //             bucket: 'stackflow'
-    //         }
-    //     })
+            }
+        })
         //   dest:'uploads'
       }),
       DbModule,
