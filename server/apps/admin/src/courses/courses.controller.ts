@@ -4,6 +4,7 @@ import { Course } from '@libs\t/db/models/course.model';
 import { InjectModel } from 'nestjs-typegoose';
 import { ReturnModelType } from '@typegoose/typegoose';
 import { ApiTags } from '@nestjs/swagger';
+
 @Crud({
     model:Course
 })
@@ -15,9 +16,12 @@ export class CoursesController {
     option(){
         return {
             title:"课程管理",
+
             column:[
-                {prop:"name",label:"课程名称"},
-                {prop:"cover",label:"课程封面"}
+
+                {prop:"name",label:"课程名称",sortable:true,search:true,regex:true,row:true},
+
+                {prop:"cover",label:"课程封面",type:"upload",dataType:"string",action:"/uploads", width:"120"}
             ]
         }
     }
